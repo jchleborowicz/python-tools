@@ -1,0 +1,9 @@
+= Python-based tools for command line
+
+== open_idea.py
+Accepts directory as an optional parameter.
+
+`idea` must by present on command line.
+
+Opens idea with build.gradle or pom.xml from specified
+or current directory.
