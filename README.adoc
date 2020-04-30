@@ -7,3 +7,8 @@ Accepts directory as an optional parameter.
 
 Opens idea with build.gradle or pom.xml from specified
 or current directory.
+
+Example bash alias:
+
+[source,bash]
+alias oid='~/prj/python-tools/open_idea.py'
