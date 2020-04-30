@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+# Opens intellij idea with build.gradle or pom.xml from current
+# directory or a directory specified as an argument.
+# 'idea' program must be accessible from command line.
+
 import os
 import subprocess
 import sys
@@ -8,7 +12,7 @@ if __name__ == '__main__':
 
     def run(c):
         print('running: %s' % c)
-        return subprocess.Popen(c).pid
+        return subprocess.Popen(c, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).pid
 
 
     def check(condition, message):
@@ -35,10 +39,9 @@ if __name__ == '__main__':
     mvn_exists = os.path.exists(mvn_pom)
     gradle_exists = os.path.exists(gradle_build)
 
-    check(gradle_exists or mvn_exists,
-          'there must be a build.gradle or a pom.xml in the root of the folder %s.' % dir_name)
-
     if gradle_exists:
         run(['idea', '%s/build.gradle' % dir_name])
-    else:
+    elif mvn_exists:
         run(['idea', '%s/pom.xml' % dir_name])
+    else:
+        panic('there must be a build.gradle or a pom.xml in the root of the folder %s.' % dir_name)
