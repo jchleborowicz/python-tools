@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     def run(c):
         print('running: %s' % c)
-        return subprocess.check_call(c, shell=True)
+        return subprocess.Popen(c).pid
 
 
     def check(condition, message):
@@ -19,6 +19,7 @@ if __name__ == '__main__':
     def panic(message):
         print("ERROR:", message)
         sys.exit(1)
+
 
     check(len(sys.argv) <= 1, 'at most one parameter allowed - directory name')
 
@@ -38,7 +39,6 @@ if __name__ == '__main__':
           'there must be a build.gradle or a pom.xml in the root of the folder %s.' % dir_name)
 
     if gradle_exists:
-        run('idea  %s/build.gradle' % dir_name)
+        run(['idea', '%s/build.gradle' % dir_name])
     else:
-        run('xdg-open %s/pom.xml' % dir_name)
-
+        run(['idea', '%s/pom.xml' % dir_name])
