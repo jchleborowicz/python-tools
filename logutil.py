@@ -5,10 +5,6 @@ import re
 import sys
 from typing import Callable
 
-HELP = """Expected arguments:
-* directory (optional)
-* search string (mandatory)"""
-
 
 def die(message: str):
     print(message, file=sys.stderr)
